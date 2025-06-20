@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import {
   IonButton,
   IonContent,
@@ -13,6 +13,10 @@ import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } 
 import { addIcons } from "ionicons";
 import { eyeOffOutline, eyeOutline } from "ionicons/icons";
 import { Router, RouterModule } from "@angular/router";
+import { AuthenticationService } from "../../core/services/authentication/authentication.service";
+import { RegisterApiInterface, RegisterApiResponseInterface } from "../../core/models/register.api.interface";
+import { StorageService } from "../../core/services/storage/storage.service";
+import { StorageKeyEnum } from "../../core/enums/storage-key.enum";
 
 export type Registration = {
   email: string;
@@ -47,7 +51,11 @@ export class RegisterPage {
   protected typeOfPasswordInput = 'password';
   protected iconOfPasswordInput = 'eye-outline';
 
-  constructor(private router: Router) {
+  private readonly router = inject(Router);
+  private readonly authenticationService = inject(AuthenticationService);
+  private readonly storageService = inject(StorageService);
+
+  constructor() {
     addIcons({eyeOutline, eyeOffOutline});
   }
 
@@ -63,6 +71,13 @@ export class RegisterPage {
 
   public onRegister(): void {
     const registrationValue: Registration = this.registerForm.value as Registration;
+    this.authenticationService.register(registrationValue as RegisterApiInterface).subscribe({
+      next: (registrationResponse: RegisterApiResponseInterface) => {
+        this.storageService.setItem(StorageKeyEnum.ACCESS_TOKEN, registrationResponse.access_token);
+        this.router.navigate(['/todos']);
+      },
+      error: () => {},
+    });
   }
 
 }
