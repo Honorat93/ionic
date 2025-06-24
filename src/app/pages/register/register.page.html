@@ -6,6 +6,31 @@
 
 <ion-content>
   <div class="register-form" [formGroup]="registerForm">
+
+    <ion-item>
+      <ion-input label="Prénom"
+                 labelPlacement="stacked"
+                 placeholder="Entrer votre prénom"
+                 formControlName="firstname"
+                 [required]="true">
+      </ion-input>
+    </ion-item>
+    @if(registerForm.controls.firstname.errors && registerForm.controls.firstname.dirty) {
+      <span class="error-message">Le prénom est requis.</span>
+    }
+
+    <ion-item>
+      <ion-input label="Nom"
+                 labelPlacement="stacked"
+                 placeholder="Entrer votre nom"
+                 formControlName="lastname"
+                 [required]="true">
+      </ion-input>
+    </ion-item>
+    @if(registerForm.controls.lastname.errors && registerForm.controls.lastname.dirty) {
+      <span class="error-message">Le nom est requis.</span>
+    }
+
     <ion-item>
       <ion-input label="E-mail"
                  type="email"
@@ -16,9 +41,8 @@
       </ion-input>
     </ion-item>
     @if(registerForm.controls.email.errors && registerForm.controls.email.dirty) {
-      <span class="error-message">Votre email est invalide. </span>
+      <span class="error-message">Votre email est invalide.</span>
     }
-
 
     <ion-item>
       <ion-input label="Mot de passe"
@@ -34,7 +58,7 @@
       </ion-input>
     </ion-item>
     @if(registerForm.controls.password.errors && registerForm.controls.password.dirty) {
-      <span class="error-message">Votre mot de passe est invalide. </span>
+      <span class="error-message">Votre mot de passe est invalide.</span>
     }
 
     <div class="register-button">

@@ -1,0 +1,49 @@
+
+
+<ng-template #loading>
+</ng-template>
+
+@defer (when todo) {
+
+    <ion-header>
+    <ion-toolbar>
+      <ion-buttons slot="start">
+        <ion-back-button defaultHref="/todos"></ion-back-button>
+      </ion-buttons>
+      <ion-title>Détail de la tâche</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  
+  <ion-content>
+    <ion-card>
+      <ion-card-header style="display: flex; justify-content: space-between;">
+        <ion-card-title>{{ todo!.title }}</ion-card-title>
+
+        <ion-icon
+          name="create"
+          size="small"
+          color="primary"
+          style="cursor: pointer;"
+          (click)="goToEdit()">
+        </ion-icon>
+      </ion-card-header>
+
+      <ion-card-content>
+        <p><strong>Description :</strong> {{ todo!.description }}</p>
+        <p><strong>Statut :</strong> {{ todo!.completed ? 'Complétée' : 'En cours' }}</p>
+      </ion-card-content>
+    </ion-card>
+  </ion-content>
+} @placeholder {
+  <ion-content>
+    <ion-label class="ion-padding">Chargement...</ion-label>
+  </ion-content>
+} @loading {
+  <ion-content>
+    <ion-label class="ion-padding">Chargement de la tâche...</ion-label>
+  </ion-content>
+} @error {
+  <ion-content>
+    <ion-label class="ion-padding color-danger">Erreur lors du chargement de la tâche.</ion-label>
+  </ion-content>
+}
