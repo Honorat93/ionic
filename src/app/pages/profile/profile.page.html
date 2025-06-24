@@ -1,0 +1,32 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/todos"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Profil</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content>
+  <form [formGroup]="profileForm" style="padding: 16px">
+    <ion-item>
+      <ion-input label="Prénom" labelPlacement="stacked" formControlName="firstname"></ion-input>
+    </ion-item>
+    @if(profileForm.controls.firstname.errors && profileForm.controls.firstname.dirty) {
+      <span class="error-message">Le prénom est requis.</span>
+    }
+
+    <ion-item>
+      <ion-input label="Nom" labelPlacement="stacked" formControlName="lastname"></ion-input>
+    </ion-item>
+    @if(profileForm.controls.lastname.errors && profileForm.controls.lastname.dirty) {
+      <span class="error-message">Le nom est requis.</span>
+    }
+
+    <ion-button expand="block" [disabled]="profileForm.invalid || isLoading" (click)="onSave()">
+      Enregistrer
+    </ion-button>
+
+  </form>
+</ion-content>
