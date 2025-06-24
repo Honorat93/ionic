@@ -1,13 +1,10 @@
 import { Routes } from '@angular/router';
+import { homeGuard } from "./core/guards/home.guard";
 
 export const routes: Routes = [
   {
-    path: 'home',
-    loadComponent: () => import('./home/home.page').then((m) => m.HomePage),
-  },
-  {
     path: '',
-    redirectTo: 'home',
+    redirectTo: 'login',
     pathMatch: 'full',
   },
   {
@@ -16,18 +13,24 @@ export const routes: Routes = [
   },
   {
     path: 'login',
-    loadComponent: () => import('./pages/login/login.page').then( m => m.LoginPage)
+    loadComponent: () => import('./pages/login/login.page').then( m => m.LoginPage),
+    canActivate: [homeGuard]
   },
   {
     path: 'todos',
-    loadComponent: () => import('./pages/todos/todos.page').then( m => m.TodosPage)
-  },
-  {
-    path: 'create-todo',
-    loadComponent: () => import('./pages/todos/create-todo/create-todo.page').then( m => m.CreateTodoPage)
-  },
-  {
-    path: 'edit-todo',
-    loadComponent: () => import('./pages/todos/edit-todo/edit-todo.page').then( m => m.EditTodoPage)
+    children: [
+      {
+        path: '',
+        loadComponent: () => import('./pages/todos/todos.page').then( m => m.TodosPage)
+      },
+      {
+        path: 'create',
+        loadComponent: () => import('./pages/todos/create-todo/create-todo.page').then( m => m.CreateTodoPage)
+      },
+      {
+        path: ':id/edit',
+        loadComponent: () => import('./pages/todos/edit-todo/edit-todo.page').then( m => m.EditTodoPage)
+      }
+    ]
   },
 ];

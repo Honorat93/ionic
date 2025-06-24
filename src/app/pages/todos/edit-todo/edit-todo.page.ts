@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonContent, IonHeader, IonTitle, IonToolbar } from '@ionic/angular/standalone';
+import { ActivatedRoute } from "@angular/router";
 
 @Component({
   selector: 'app-edit-todo',
@@ -10,11 +11,11 @@ import { IonContent, IonHeader, IonTitle, IonToolbar } from '@ionic/angular/stan
   standalone: true,
   imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule]
 })
-export class EditTodoPage implements OnInit {
+export class EditTodoPage {
 
-  constructor() { }
+  private readonly activatedRoute = inject(ActivatedRoute);
 
-  ngOnInit() {
-  }
+  // @TODO Récupération de l'id de la tâche
+  private todoId = +this.activatedRoute.snapshot.params['id'];
 
 }
