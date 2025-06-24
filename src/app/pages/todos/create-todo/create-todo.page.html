@@ -1,13 +1,44 @@
-<ion-header [translucent]="true">
+<ion-header>
   <ion-toolbar>
-    <ion-title>create-todo</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/todos"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Nouvelle Tâche</ion-title>
   </ion-toolbar>
 </ion-header>
+<ion-content>
+  <div class="todo-form" [formGroup]="todoForm">
+    <ion-item>
+      <ion-input label="Titre"
+                 type="text"
+                 labelPlacement="stacked"
+                 placeholder="Titre de la tâche"
+                 formControlName="title"
+                 required>
+      </ion-input>
+    </ion-item>
+    @if(todoForm.controls.title.errors && todoForm.controls.title.dirty) {
+      <span class="error-message">Le titre est requis (min. 3 caractères)</span>
+    }
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">create-todo</ion-title>
-    </ion-toolbar>
-  </ion-header>
+    <ion-item>
+      <ion-input label="Description"
+                 type="text"
+                 labelPlacement="stacked"
+                 placeholder="Description"
+                 formControlName="description">
+      </ion-input>
+    </ion-item>
+
+    <ion-item lines="none">
+      <ion-label>Complétée ?</ion-label>
+      <ion-toggle formControlName="completed"></ion-toggle>
+    </ion-item>
+
+    <div class="todo-submit">
+      <ion-button mode="ios" expand="block" (click)="onCreateTodo()" [disabled]="todoForm.invalid">
+        Créer la tâche
+      </ion-button>
+    </div>
+  </div>
 </ion-content>
