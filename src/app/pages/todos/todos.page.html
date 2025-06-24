@@ -1,5 +1,6 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
+<<<<<<< Updated upstream
     <ion-title>todos</ion-title>
   </ion-toolbar>
 </ion-header>
@@ -10,4 +11,84 @@
       <ion-title size="large">todos</ion-title>
     </ion-toolbar>
   </ion-header>
+=======
+    <ion-title>ToDo List</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="logout()" title="Déconnexion">
+        <ion-icon name="log-out-outline"></ion-icon>
+      </ion-button>
+      <ion-button [routerLink]="['/profile']" title="Profil">
+        <ion-icon name="person-circle-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content>
+  @for (todo of todos; track todo.id) {
+    <ion-card>
+      <ion-card-header class="card-header">
+        <div class="card-header-content">
+          <ion-card-title (click)="goToDetail(todo.id)" style="cursor: pointer;">{{ todo.title }}</ion-card-title>
+
+          <div class="actions">
+            <ion-icon
+              name="create"
+              size="small"
+              color="primary"
+              style="cursor: pointer;"
+              (click)="onUpdateTodo(todo.id)">
+            </ion-icon>
+
+            <ion-icon
+              name="trash"
+              size="small"
+              color="danger"
+              style="cursor: pointer;"
+              (click)="openDeleteModal(todo.id)">
+            </ion-icon>
+          </div>
+        </div>
+      </ion-card-header>
+
+      <ion-card-content>
+        {{ todo.description }}
+      </ion-card-content>
+    </ion-card>
+  }
+
+  @if (todos.length === 0) {
+    <ion-label class="ion-padding">
+      Aucune tâche créée pour le moment !
+    </ion-label>
+  }
+>>>>>>> Stashed changes
 </ion-content>
+
+<ion-fab vertical="bottom" horizontal="end" slot="fixed">
+  <ion-fab-button (click)="createTodo()" color="primary" title="Ajouter une tâche">
+    <ion-icon name="add"></ion-icon>
+  </ion-fab-button>
+</ion-fab>
+
+<ion-modal [isOpen]="isModalOpen" (didDismiss)="closeModal()">
+  <ng-template>
+    <ion-header>
+      <ion-toolbar>
+        <ion-title>Confirmer</ion-title>
+        <ion-buttons slot="end">
+          <ion-button (click)="closeModal()">✖</ion-button>
+        </ion-buttons>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content class="ion-padding">
+      <ion-icon name="warning" color="danger" size="large" style="display: block; text-align: center;"></ion-icon>
+      <h2 style="text-align: center;">Supprimer cette tâche ?</h2>
+      <p style="text-align: center;">Cette action est irréversible.</p>
+
+      <ion-button expand="block" color="danger" (click)="confirmDelete()">Oui, supprimer</ion-button>
+      <ion-button expand="block" fill="outline" color="medium" (click)="closeModal()">Annuler</ion-button>
+    </ion-content>
+  </ng-template>
+</ion-modal>
