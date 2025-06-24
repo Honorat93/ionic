@@ -10,8 +10,25 @@ import { Observable } from 'rxjs';
 export class TodoService {
 
   private httpClient = inject(HttpClient);
+  private readonly baseUrl = `${environment.baseURL}todos/`;
 
   public getTodos(): Observable<TodoApiResponseInterface[]> {
-    return this.httpClient.get<TodoApiResponseInterface[]>(`${environment.baseURL}todos/`);
+    return this.httpClient.get<TodoApiResponseInterface[]>(this.baseUrl);
+  }
+
+  public getTodoById(id: number): Observable<TodoApiResponseInterface> {
+    return this.httpClient.get<TodoApiResponseInterface>(`${this.baseUrl}${id}/`);
+  }
+
+  public createTodo(payload: Partial<TodoApiResponseInterface>): Observable<TodoApiResponseInterface> {
+    return this.httpClient.post<TodoApiResponseInterface>(this.baseUrl, payload);
+  }
+
+  public updateTodo(id: number, payload: Partial<TodoApiResponseInterface>): Observable<TodoApiResponseInterface> {
+    return this.httpClient.put<TodoApiResponseInterface>(`${this.baseUrl}${id}/`, payload);
+  }
+
+  public deleteTodo(id: number): Observable<void> {
+    return this.httpClient.delete<void>(`${this.baseUrl}${id}/`);
   }
 }
