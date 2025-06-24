@@ -1,0 +1,23 @@
+.card-header-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.actions {
+  display: flex;
+  gap: 12px;
+}
+
+.actions ion-icon {
+  cursor: pointer;
+  font-size: 18px;
+}
+
+ion-content {
+  --overflow: hidden; 
+}
+
+ion-fab {
+  z-index: 1000; 
+}
