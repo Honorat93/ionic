@@ -1,9 +1,3 @@
-<<<<<<< Updated upstream
-import { Component, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
-import { IonContent, IonHeader, IonTitle, IonToolbar } from '@ionic/angular/standalone';
-=======
 import { Component, inject } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { IonContent, IonHeader, IonTitle, IonToolbar, IonButton, IonItem, IonToggle, IonInput, IonLabel, IonButtons, IonBackButton } from '@ionic/angular/standalone';
@@ -12,7 +6,6 @@ import { CommonModule } from '@angular/common';
 import { TodoService } from '../../../core/services/todo/todo.service';
 import { TodoApiResponseInterface } from '../../../core/models/todo.api.interface';
 import { ActivatedRoute } from "@angular/router";
->>>>>>> Stashed changes
 
 @Component({
   selector: 'app-edit-todo',
@@ -36,14 +29,8 @@ import { ActivatedRoute } from "@angular/router";
     IonBackButton,
   ]
 })
-export class EditTodoPage implements OnInit {
+export class EditTodoPage {
 
-<<<<<<< Updated upstream
-  constructor() { }
-
-  ngOnInit() {
-  }
-=======
   protected todoForm = new FormGroup({
     title: new FormControl('', [Validators.required, Validators.minLength(3)]),
     description: new FormControl(''),
@@ -54,7 +41,6 @@ export class EditTodoPage implements OnInit {
   private readonly router = inject(Router);
   private readonly todoService = inject(TodoService);
   private todoId!: number;
->>>>>>> Stashed changes
 
   ngOnInit(): void {
     this.todoId = +this.route.snapshot.params['id'];

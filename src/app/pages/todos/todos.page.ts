@@ -1,9 +1,3 @@
-<<<<<<< Updated upstream
-import { Component, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
-import { IonContent, IonHeader, IonTitle, IonToolbar } from '@ionic/angular/standalone';
-=======
 import { Component, inject } from '@angular/core';
 import { TodoApiResponseInterface } from '../../core/models/todo.api.interface';
 import { TodoService } from '../../core/services/todo/todo.service';
@@ -16,22 +10,12 @@ import { IonCard, IonCardContent, IonCardHeader, IonCardTitle, IonContent, IonHe
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { AuthenticationService } from "../../core/services/authentication/authentication.service";
->>>>>>> Stashed changes
 
 @Component({
   selector: 'app-todos',
   templateUrl: './todos.page.html',
   styleUrls: ['./todos.page.scss'],
   standalone: true,
-<<<<<<< Updated upstream
-  imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule]
-})
-export class TodosPage implements OnInit {
-
-  constructor() { }
-
-  ngOnInit() {
-=======
   imports: [
     CommonModule,
     FormsModule,
@@ -83,7 +67,6 @@ export class TodosPage {
         console.error('Erreur lors de la récupération des tâches:', error);
       }
     });
->>>>>>> Stashed changes
   }
 
   protected createTodo(): void {

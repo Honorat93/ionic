@@ -1,18 +1,11 @@
 import { Routes } from '@angular/router';
-<<<<<<< Updated upstream
-=======
 import { homeGuard } from "./core/guards/home.guard";
 import { authGuard } from "./core/guards/auth.guard"; 
->>>>>>> Stashed changes
 
 export const routes: Routes = [
   {
-    path: 'home',
-    loadComponent: () => import('./home/home.page').then((m) => m.HomePage),
-  },
-  {
     path: '',
-    redirectTo: 'home',
+    redirectTo: 'login',
     pathMatch: 'full',
   },
   {
@@ -21,27 +14,12 @@ export const routes: Routes = [
   },
   {
     path: 'login',
-<<<<<<< Updated upstream
-    loadComponent: () => import('./pages/login/login.page').then( m => m.LoginPage)
-  },
-  {
-    path: 'todos',
-    loadComponent: () => import('./pages/todos/todos.page').then( m => m.TodosPage)
-  },
-  {
-    path: 'create-todo',
-    loadComponent: () => import('./pages/todos/create-todo/create-todo.page').then( m => m.CreateTodoPage)
-  },
-  {
-    path: 'edit-todo',
-    loadComponent: () => import('./pages/todos/edit-todo/edit-todo.page').then( m => m.EditTodoPage)
-=======
     loadComponent: () => import('./pages/login/login.page').then(m => m.LoginPage),
     canActivate: [homeGuard]
   },
   {
     path: 'todos',
-    canActivate: [authGuard], // ✅ protection ici
+    canActivate: [authGuard],
     children: [
       {
         path: '',
@@ -65,7 +43,6 @@ export const routes: Routes = [
         ]
       }
     ]
->>>>>>> Stashed changes
   },
   {
     path: 'profile',
