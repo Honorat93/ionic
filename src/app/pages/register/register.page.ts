@@ -21,7 +21,10 @@ import { StorageKeyEnum } from "../../core/enums/storage-key.enum";
 export type Registration = {
   email: string;
   password: string;
-}
+  firstname: string;
+  lastname: string;
+};
+
 
 @Component({
   selector: 'app-register',
@@ -46,6 +49,8 @@ export class RegisterPage {
   protected registerForm = new FormGroup({
     email: new FormControl('', [Validators.required, Validators.email]),
     password: new FormControl('', [Validators.required, Validators.minLength(10)]),
+    firstname: new FormControl('', [Validators.required]),
+    lastname: new FormControl('', [Validators.required]),
   });
 
   protected typeOfPasswordInput = 'password';
@@ -74,6 +79,10 @@ export class RegisterPage {
     this.authenticationService.register(registrationValue as RegisterApiInterface).subscribe({
       next: (registrationResponse: RegisterApiResponseInterface) => {
         this.storageService.setItem(StorageKeyEnum.ACCESS_TOKEN, registrationResponse.access_token);
+
+        this.storageService.setItem(StorageKeyEnum.USER_FIRSTNAME, registrationValue.firstname);
+        this.storageService.setItem(StorageKeyEnum.USER_LASTNAME, registrationValue.lastname);
+
         this.router.navigate(['/todos']);
       },
       error: () => {},

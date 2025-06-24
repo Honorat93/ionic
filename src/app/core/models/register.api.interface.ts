@@ -1,6 +1,8 @@
 export interface RegisterApiInterface {
   email: string;
   password: string;
+  firstname: string;
+  lastname: string;
 }
 
 export interface RegisterApiResponseInterface {
@@ -10,8 +12,10 @@ export interface RegisterApiResponseInterface {
 }
 
 export interface UserDataRegisterApiResponseInterface {
-  email: string;
   id: number;
+  email: string;
+  firstname: string;
+  lastname: string;
   created_at: string;
   password: string;
 }
