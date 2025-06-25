@@ -1,14 +1,5 @@
 import { Component, inject } from '@angular/core';
-import {
-  IonButton,
-  IonContent,
-  IonHeader,
-  IonIcon,
-  IonInput,
-  IonItem,
-  IonTitle,
-  IonToolbar
-} from '@ionic/angular/standalone';
+import { IonButton, IonContent, IonHeader, IonIcon, IonInput, IonItem, IonTitle, IonToolbar, IonButtons, IonBackButton} from '@ionic/angular/standalone';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from "@angular/forms";
 import { addIcons } from "ionicons";
 import { eyeOffOutline, eyeOutline } from "ionicons/icons";
@@ -43,6 +34,8 @@ export type Registration = {
     IonIcon,
     ReactiveFormsModule,
     RouterModule,
+    IonButtons,
+    IonBackButton,
   ]
 })
 export class RegisterPage {

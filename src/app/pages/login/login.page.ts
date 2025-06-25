@@ -1,16 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
-import {
-  IonButton,
-  IonContent,
-  IonHeader,
-  IonIcon,
-  IonInput,
-  IonItem,
-  IonTitle,
-  IonToolbar
-} from '@ionic/angular/standalone';
+import { IonButton, IonContent,IonHeader,IonIcon, IonInput, IonItem, IonTitle, IonToolbar, IonText} from '@ionic/angular/standalone';
 import { Router } from "@angular/router";
 import { addIcons } from "ionicons";
 import { eyeOffOutline, eyeOutline } from "ionicons/icons";
@@ -31,7 +22,7 @@ export type Login = {
   templateUrl: './login.page.html',
   styleUrls: ['./login.page.scss'],
   standalone: true,
-  imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, IonButton, IonIcon, IonInput, IonItem, ReactiveFormsModule]
+  imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, IonButton, IonIcon, IonText, IonInput, IonItem, ReactiveFormsModule]
 })
 export class LoginPage {
   protected loginForm = new FormGroup({
@@ -70,6 +61,9 @@ export class LoginPage {
       },
       error: () => {},
     })
+  }
+  public onNavigateToRegister(): void {
+    this.router.navigate(['/register']);
   }
 
 }
