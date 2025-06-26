@@ -36,7 +36,13 @@
     @if(loginForm.controls.password.errors && loginForm.controls.password.dirty) {
       <span class="error-message">Votre mot de passe est invalide. </span>
     }
-
+    @if (loginErrorMessage) {
+    <div class="login-error-message">
+      <ion-text color="danger">
+        {{ loginErrorMessage }}
+      </ion-text>
+    </div>
+  }
     <div class="register-button">
       <ion-button mode="ios" expand="block" (click)="onLogin()" [disabled]="loginForm.invalid">
         Se connecter

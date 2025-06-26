@@ -32,6 +32,8 @@ export class LoginPage {
 
   protected typeOfPasswordInput = 'password';
   protected iconOfPasswordInput = 'eye-outline';
+  protected loginErrorMessage: string | null = null;
+
 
   private readonly router = inject(Router);
   private readonly authenticationService = inject(AuthenticationService);
@@ -59,7 +61,13 @@ export class LoginPage {
         this.storageService.setItem(StorageKeyEnum.ACCESS_TOKEN, loginResponse.access_token);
         this.router.navigate(['/todos']);
       },
-      error: () => {},
+      error: (error) => {
+      if (error.status === 401) {
+        this.loginErrorMessage = "Identifiants incorrects. Veuillez réessayer.";
+      } else {
+        this.loginErrorMessage = "Une erreur est survenue. Veuillez réessayer plus tard.";
+      }
+    }
     })
   }
   public onNavigateToRegister(): void {
